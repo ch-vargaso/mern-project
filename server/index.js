@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 dotenv.config();
 import userRouter from "./routes/userRoutes.js";
+import petRouter from "./routes/petRoutes.js";
 import cors from "cors";
 
 const app = express();
@@ -34,6 +35,7 @@ mongoose
 // });  
 
 app.use('/api/users', userRouter);
+app.use('/api/pets', petRouter);
 
 // const helloFunction = (req, res) => {
 //   res.send({message: 'Hello World!', example: [1, 2, 3, 4, 5]})

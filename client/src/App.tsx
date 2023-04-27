@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-// import {Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import './App.css';
-// import Home from './pages/Home';
+import Home from './pages/Home';
+import Register from './pages/Register';
 
 interface User{
   email: String,
@@ -31,18 +32,18 @@ function App() {
     <div className="App">
       <h1>App funcionando...</h1>
       <div>
-      {/* {users && users.map((user, i) => {
+      {users && users.map((user, i) => {
         return <p key={i}>
           {user.username}</p>
-      })} */}
+      })}
       
       </div>
+      <Routes> 
+        <Route path='/' element={<Home />} />
+        <Route path='/register' element={<Register/>} />
+      </Routes>
     </div>
-  // <>
-  //     <Routes> 
-  //       <Route path='/' element={<Home/>} />
-  //     </Routes>
-  //   </>
+  
     
   );
 }

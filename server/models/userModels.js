@@ -3,8 +3,9 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: true },
-    username: String,
+    username: { type: String },
     password: { type: String, required: true },
+    pets: [{type: mongoose.Schema.Types.ObjectId, ref: "pet"}]
   }, { timestamps: true }
 );
 
@@ -19,3 +20,4 @@ export default UserModel
 //  con el timestamp... se actualiza la hora/fecha de cada objeto cada vezq eu se hace unaa actualización para crear un registro 
 
 // Aquí se peuden algunas estructuras que se pueden crear...   https://mongoosejs.com/docs/guide.html
+// Linea 8: my user can have multiple pets so it has to be an array
