@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cloudinaryConfig from "./config/cloudinary.js";
 import * as dotenv from "dotenv";
 dotenv.config();
 import userRouter from "./routes/userRoutes.js";
@@ -9,33 +10,51 @@ import cors from "cors";
 const app = express();
 const port = process.env.PORT || 5001;
 
-app.use(express.json());
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
-app.use(cors());
+const setMiddlewares = () => {
+  app.use(express.json());
+  app.use(
+    express.urlencoded({
+      extended: true,
+    })
+  );
+  app.use(cors());
+  cloudinaryConfig();
+};
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(port, () => {
-      console.log(
-        "Connection to MongoDB established, and server is running on port " +
+const connectMongoose = () => {
+  mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => {
+      app.listen(port, () => {
+        console.log(
+          "Connection to MongoDB established, and server is running on port " +
           port
-      );
-    });
-  })
-  .catch((err) => console.log(err));
+        );
+      });
+    })
+    .catch((err) => console.log(err));
+};
+
+const connectRoutes = () => {
+  app.use('/api/users', userRouter);
+  app.use('/api/pets', petRouter);
+};
+
+setMiddlewares();
+connectMongoose();
+connectRoutes();
+
+
+// si en algún momento se llega a colapsar el PORT... se utiliza en la terminal en la carppta server el siguiente comando... npx kill-port (puerto deseado)... 
+// hay que esperar pero funciona...
+
+// export {setMiddlewares, connectMongoose, connectRoutes}
 
 
 // app.listen(port, () => {
 //   console.log("Server is running on port" + port);
 // });  
 
-app.use('/api/users', userRouter);
-app.use('/api/pets', petRouter);
 
 // const helloFunction = (req, res) => {
 //   res.send({message: 'Hello World!', example: [1, 2, 3, 4, 5]})

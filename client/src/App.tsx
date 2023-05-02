@@ -3,6 +3,8 @@ import {Route, Routes} from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import Register from './pages/Register';
+import Login from './pages/Login';
+import { AuthContextProvider } from './contexts/AuthContext';
 
 interface User{
   email: String,
@@ -32,21 +34,22 @@ function App() {
     <div className="App">
       <h1>App funcionando...</h1>
       <div>
-      {users && users.map((user, i) => {
-        return <p key={i}>
-          {user.username}</p>
-      })}
+        {users && users.map((user, i) => {
+          return <p key={i}>
+            {user.username}</p>
+        })}
       
       </div>
-      <Routes> 
-        <Route path='/' element={<Home />} />
-        <Route path='/register' element={<Register/>} />
-      </Routes>
+      <AuthContextProvider>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+        </Routes>
+      </AuthContextProvider>
     </div>
-  
-    
   );
-}
+};
 
 export default App;
 

@@ -2,12 +2,15 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    email: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
     username: { type: String },
     password: { type: String, required: true },
-    pets: [{type: mongoose.Schema.Types.ObjectId, ref: "pet"}]
+    pets: [{ type: mongoose.Schema.Types.ObjectId, ref: "pet" }],
+    avatar: { type: String, default: "https://res.cloudinary.com/dxyregqsx/image/upload/v1682681502/user_avatars/placeholder_gik52p.png" }
+
   }, { timestamps: true }
 );
+// linea 9: la funcion default es para poner una imagen en caso de que no se cree o se suba ninguna imagen...
 
 const UserModel = mongoose.model("user", userSchema);
 

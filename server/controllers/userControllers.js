@@ -1,4 +1,6 @@
 import UserModel from "../models/userModels.js"
+import { encryptPassword, verifyPassword } from "../utils/bcrypt.js";
+import { imageUpload } from "../utils/imageManagement.js";
 
 
 const testingRoute = (req, res) => {
@@ -16,34 +18,42 @@ const getUsers = async (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    const id = req.params.id; 
+    const id = req.params.id;
     try {
         const user = await UserModel.findById(id).populate("pets");
         res.status(200).json(user)
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: "algo salió mal..."})
+        res.status(500).json({ error: "algo salió mal..." })
         
     }
-}
+};
 
 const createUser = async (req, res) => {
-    console.log(req.body);
-    const newUser = new UserModel({
-        ...req.body
-    });
-    try {
-        const registeredUser = await newUser.save();
-        res.status(200).json({
-            message: "por fin te registraste!!... desde el server", 
-            newUser: registeredUser
-            // Aquí de pronto no es bueno enviar nada... o el username, quizás...
-        })
-    } catch (error) {
-        console.log(error);
-        res.status(500).json("salió mal, please try again...") 
+    if (!req.body.email || !req.body.password || !req.body.username) {
+        return res.status(406).json({ error: "por favor llene todos los campos..." })
     }
-}
+    const avatar = await imageUpload(req.file, "user_avatars");
+    const encryptedPassword = await encryptPassword(req.body.password);
+    console.log("avatar", avatar);
+      // new user with encrypted password created!!!! yuhuuuuuuu!!!!!
+    // const newUser = new UserModel({
+    //     ...req.body,
+    //     password: encryptedPassword, 
+    //     avatar: avatar
+    // });
+    // try {
+    //     const registeredUser = await newUser.save();
+    //     res.status(200).json({
+    //         message: "por fin te registraste!!... desde el server",
+    //         newUser: registeredUser
+    //         // Aquí de pronto no es bueno enviar nada... o el username, quizás...
+    //     })
+    // } catch (error) {
+    //     console.log(error);
+    //     res.status(500).json("salió mal, please try again...")
+    // }
+};
 
 const updateUser = async (req, res) => {
     try {
@@ -54,11 +64,46 @@ const updateUser = async (req, res) => {
         console.log(error);
         res.status(500).send(error.message);
     }
-}
+};
 
-export { testingRoute, getUsers, getUser, createUser, updateUser }
+// finBYID... se usa cuando uno tiene algún id??? leer lo de la documentación...
+const login = async (req, res) => {
+    try {
+        const existingUser = await UserModel.findOne({ email: req.body.email });
+        // verifyPassword(req.body.password, existingUser.password);
+        if (!existingUser) {
+            res.status(404).json({ error: "no se encontró ningún usuario..." })
+            return;
+        }
+        if (existingUser) {
+            const verified = await verifyPassword(req.body.password, existingUser.password);
+            if (!verified) {
+                res.status(406).json({ error: "password doesn't match..." })
+            }
+            if (verified) {
+                res.status(200).json({
+                    verified: true,
+                    user: {
+                        _id: existingUser._id,
+                        username: existingUser.username,
+                        pets: existingUser.pets,
+                        avatar: existingUser.avatar
+                    }
+                })
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "something went wrong... not autentified..." })
+    }
+};
+
+
+export { testingRoute, getUsers, getUser, createUser, updateUser, login }
 
 //  si uno hace un cosole.log del req, se puede ver todas las propiedades del objeto
 //  con la funcion find. algo, se puede hacer una variedad de cosas con el fin by...
 // linea 33: poner cuidado si se quieren adherir más cosas al array se tiene que especificar, por ejemplo: 
 // pets:[pet1, pet2, pet3]
+//  para borrar imagenes se necesita el public id del elemento....  
+//  Se puede crear un folder para cada user...

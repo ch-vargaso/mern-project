@@ -1,5 +1,6 @@
 import express from "express";
-import { testingRoute, getUsers, getUser, createUser, updateUser } from "../controllers/userControllers.js";
+import { testingRoute, getUsers, getUser, createUser, updateUser, login } from "../controllers/userControllers.js";
+import { multerUpload } from "../middlewares/multer.js";
 
 // const express = require('express')
 const userRouter = express.Router();
@@ -8,8 +9,10 @@ userRouter.get("/test", testingRoute);
 userRouter.get("/all", getUsers);
 userRouter.get("/id/:id", getUser);
 
-userRouter.post("/new", createUser);
+userRouter.post("/new", multerUpload.single("avatar"), createUser);
 userRouter.post("/update/:id", updateUser);
+userRouter.post("/login", login);
+
 
 
 
