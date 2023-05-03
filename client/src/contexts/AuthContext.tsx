@@ -1,31 +1,46 @@
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useEffect, useState } from 'react'
 
 interface User {
-    password: string,
     email?: string, //el singo de pregunta significa que puede ser optional...
     username: string,
     avatar: string,
     pets: string[]
 };
+interface fetchResult {
+    token: string,
+    verified: boolean,
+    user: User
+}
+
+interface fetchFailed {
+    error: string
+}
 
 interface AuthContextType {
-    user: User | null,
+    user: boolean,
     error: Error | null,
     login(email: string, password: string): void,
+    logout():void
 }
 
 const initialAuth: AuthContextType = {
-    user: null,
+    user: false,
     error: null,
     login: () => {
         throw new Error('login not implemented...');
+    },
+    logout: () => {
+        throw new Error('logout not implemented')
     }
 };
 
 export const AuthContext = createContext<AuthContextType>(initialAuth);
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<boolean>(false);
+    console.log("active user :", user);
+    // este console log mostró que el error se puede dar por Type Script cuando no se especifica...
+    // ojo!! no lo muestra como error, pero no funciona... 
     const [error, setError] = useState<Error | null>(null);
 
     const login = async (email: string, password: string) => {
@@ -42,11 +57,18 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         };
         try {
             const response = await fetch(`${process.env.REACT_APP_BASE_URL}users/login`, requestOptions);
-            const result = await response.json();
-            if (result.user) {
-                setUser(result.user); 
+            if (response.ok) {
+                const result = await response.json() as fetchResult
+                if (result.user) {
+                    setUser(true); 
+                    localStorage.setItem("token", result.token);
+                    localStorage.setItem("my name", "christian");
+                }
+                console.log("result", result); 
+            } else {
+                const result = await response.json() as fetchFailed
+                alert(result.error)
             }
-            console.log("result", result);
         } catch (error) {
             console.log(error)
             // setError(error)
@@ -55,12 +77,33 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
  
     }
 
+    const logout = () => {
+        setUser(false)
+        localStorage.removeItem("token")
+    }
+    //  it is better to give always an easy name, becasue it will be easier to handle (it means with no spaces or something like that)
+    const checkForToken = () => {
+        const token = localStorage.getItem("token")
+        if (token) {
+            console.log("there is a token")  
+            setUser(true)
+        } else {
+            console.log("there is no token")
+            setUser(false)
+        }
+    }
+    useEffect(() => {
+        checkForToken()
+    }, [])
+    
 
     return (
-      <AuthContext.Provider value={{user, error, login}}>
+      <AuthContext.Provider value={{user, error, login, logout}}>
             {children}
       </AuthContext.Provider>
   )
 }
 
 export default AuthContext
+
+// for primitive types they need to be lowercasse 

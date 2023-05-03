@@ -46,7 +46,8 @@ function Register(props: Props) {
             body: submitData
         };
         try {
-            const response = await fetch("http://localhost:5001/api/users/new", requestOptions);
+            // const response = await fetch("http://localhost:5001/api/users/new", requestOptions);
+            const response = await fetch(`${process.env.REACT_APP_BASE_URL}users/new`, requestOptions);
             const result = await response.json();
             console.log(result);
             alert("por fin!!! a la casa, well done!!!");
@@ -71,13 +72,18 @@ function Register(props: Props) {
         <div>
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
-                <input type="email" name="email" placeholder='Email' onChange={handleChange}/>
-                <input type="text" name="username" placeholder='Username' onChange={handleChange}/>
-                <input type="password" name="password" placeholder='Password' onChange={handleChange} />
-                <input type="file" name='avatar' accept='image/png, image/jpg, image/jpeg' onChange={handleFile} />
+                <label htmlFor="email"><b>E-Mail Address</b></label><br/>
+                <input type="email" name="email" placeholder='Email' onChange={handleChange} /><br />
+                <label htmlFor="username"><b>Username</b></label><br />
+                <input type="text" name="username" placeholder='Username' onChange={handleChange} /><br />
+                <label htmlFor="password"><b>Password</b></label><br />
+                <input type="password" name="password" placeholder='Password' onChange={handleChange} /><br />
+                <label htmlFor="file"><b>Select Avatar</b></label><br />
+                <input type="file" name='avatar' accept='image/png, image/jpg, image/jpeg' onChange={handleFile} /><br /><br />
                 <button type='submit'>Enter the Matrix</button>
-                <button onClick={onClickHandler}>prueba para .env </button>
             </form>
+            <br />
+                <button onClick={onClickHandler}>prueba para .env </button>
         </div>
   )
 }

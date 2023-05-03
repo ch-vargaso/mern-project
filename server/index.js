@@ -38,6 +38,7 @@ const connectMongoose = () => {
 const connectRoutes = () => {
   app.use('/api/users', userRouter);
   app.use('/api/pets', petRouter);
+  app.use('*', (req, res) => { res.status(500).json({ error: "Endpoint not found" }) });
 };
 
 setMiddlewares();

@@ -1,6 +1,7 @@
 import UserModel from "../models/userModels.js"
 import { encryptPassword, verifyPassword } from "../utils/bcrypt.js";
 import { imageUpload } from "../utils/imageManagement.js";
+import { generateToken } from "../utils/jwt.js";
 
 
 const testingRoute = (req, res) => {
@@ -36,23 +37,23 @@ const createUser = async (req, res) => {
     const avatar = await imageUpload(req.file, "user_avatars");
     const encryptedPassword = await encryptPassword(req.body.password);
     console.log("avatar", avatar);
-      // new user with encrypted password created!!!! yuhuuuuuuu!!!!!
-    // const newUser = new UserModel({
-    //     ...req.body,
-    //     password: encryptedPassword, 
-    //     avatar: avatar
-    // });
-    // try {
-    //     const registeredUser = await newUser.save();
-    //     res.status(200).json({
-    //         message: "por fin te registraste!!... desde el server",
-    //         newUser: registeredUser
-    //         // Aquí de pronto no es bueno enviar nada... o el username, quizás...
-    //     })
-    // } catch (error) {
-    //     console.log(error);
-    //     res.status(500).json("salió mal, please try again...")
-    // }
+    //   new user with encrypted password created!!!! yuhuuuuuuu!!!!!
+    const newUser = new UserModel({
+        ...req.body,
+        password: encryptedPassword, 
+        avatar: avatar
+    });
+    try {
+        const registeredUser = await newUser.save();
+        res.status(200).json({
+            message: "por fin te registraste!!... desde el server",
+            newUser: registeredUser
+            // Aquí de pronto no es bueno enviar nada... o el username, quizás...
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json("salió mal, please try again...")
+    }
 };
 
 const updateUser = async (req, res) => {
@@ -78,11 +79,13 @@ const login = async (req, res) => {
         if (existingUser) {
             const verified = await verifyPassword(req.body.password, existingUser.password);
             if (!verified) {
-                res.status(406).json({ error: "password doesn't match..." })
+                res.status(401).json({ error: "password doesn't match..." })
             }
             if (verified) {
+                const token = generateToken(existingUser);
                 res.status(200).json({
                     verified: true,
+                    token: token,
                     user: {
                         _id: existingUser._id,
                         username: existingUser.username,

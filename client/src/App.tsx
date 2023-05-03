@@ -1,48 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import {Route, Routes} from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import { AuthContextProvider } from './contexts/AuthContext';
-
-interface User{
-  email: String,
-  username: String,
-  password: String
-} 
-type Users = User[]
+import AuthContext, { AuthContextProvider } from './contexts/AuthContext';
+import NavBar from './components/NavBar';
 
 function App() {
-  const [users, setUsers] = useState <null | Users> ([]);
-  const getUsers = async () => {
-    try {
-      const response = await fetch('http://localhost:5001/api/users/all');
-      const result = await response.json();
-      setUsers(result)
-      console.log("all users:", result);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-
+  // const { user } = useContext(AuthContext);
   return (
     <div className="App">
-      <h1>App funcionando...</h1>
+      {/* <h1>App funcionando...</h1> */}
       <div>
-        {users && users.map((user, i) => {
-          return <p key={i}>
-            {user.username}</p>
-        })}
-      
       </div>
       <AuthContextProvider>
+        {/* <div>{user ? <p>user logged in</p> : <p>user logged out</p> }</div> */}
+        <NavBar/>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/profile' element={<Profile />} /> 
+          {/* tiene que cambiar con el id del usuario... :id... */}
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
         </Routes>

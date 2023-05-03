@@ -17,15 +17,19 @@ function Login({ }: Props) {
   }
 
   return (
-    <div>
-      <h1>Login funcionando...</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="email" name="email" placeholder='Email' onChange={handleChange} />
-        <input type="password" name="password" placeholder='Password' onChange={handleChange} />
-        <button type='submit'>Log in!!</button>
-      </form>
+    <div className='login_page-container'>
+      <div className='login_container'>
+        <h1>Welcome to Graffitis</h1>
+        <form onSubmit={handleSubmit} className='login_form'>
+          <label htmlFor="email" className='login_label' ><b>E-Mail Address</b></label>
+          <input type="email" name="email" placeholder='Email' onChange={handleChange} className='login_input' /><br />
+          <label htmlFor="password" className='login_label'><b>Password</b></label>
+          <input type="password" name="password" placeholder='Password' onChange={handleChange} className='login_input' /><br />
+          <button type='submit' className='login_button' >Login</button>
+        </form>
+      </div>
     </div>
   )
-}
+};
 
 export default Login

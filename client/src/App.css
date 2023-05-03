@@ -36,3 +36,81 @@
     transform: rotate(360deg);
   }
 }
+
+/********************** Navigation Bar ***********************/
+
+.navbar_container{
+  font-size: x-large;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-transform: uppercase;
+  /* justify-content:space-between; */
+  justify-content: center;
+  margin: 20px 10px;
+}
+.first_group{
+  gap: 4rem;
+  color: yellow;
+}
+.nav_link{
+  text-decoration: none;
+  color: rgba(165, 42, 42, 0.962);
+  font-weight: 500;
+  margin: 10px;
+}
+.nav_link:hover{
+  color:rgba(169, 45, 45, 0.716);
+  text-decoration: underline;
+}
+.active_page{
+  color: rgb(82, 82, 208);
+  font-weight: 500;
+}
+
+/********************** Log in Page ***********************/
+
+/************ Login **************/
+.login_page-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login_container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: red solid 5px;
+  border-radius: 25px;
+  width: 350px;
+  height: 400px;
+  margin-top: 50px;
+  
+}
+.login_form{
+  /* border: blue solid 3px; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+.login_label{
+  font-size: 18px;
+  text-align: left;
+  margin-bottom: 5px;
+
+}
+
+.login_input{
+  border-radius: 10px;
+  height: 30px;
+  width: 260px;
+}
+.login_button{
+  border-radius: 10px;
+  height: 30px;
+  width: 90%;
+  font-size: 16px;
+  margin: 10px auto;
+  
+}
+
