@@ -44,53 +44,92 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   /* justify-content:space-between; */
   justify-content: center;
-  margin: 20px 10px;
-}
-.first_group{
-  gap: 4rem;
-  color: yellow;
+  /* margin: 20px 10px; */
+  padding-top: 10px;
+  border: green solid 3px;
+  height: 40px;
+    gap: 5px;
 }
 .nav_link{
   text-decoration: none;
   color: rgba(165, 42, 42, 0.962);
   font-weight: 500;
   margin: 10px;
+  /* border: blue solid 3px; */
 }
 .nav_link:hover{
   color:rgba(169, 45, 45, 0.716);
   text-decoration: underline;
+  padding-top: 10px;
 }
 .active_page{
   color: rgb(82, 82, 208);
   font-weight: 500;
+  padding-top: 5px;
+
 }
+.active_page:hover{
+  color: rgba(169, 45, 45, 0.716);
+}
+
+/* .navbar_login{
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  gap: 5px;
+  border: red solid 3px;
+  margin-top: -5px;
+} */
+/* .navbar_login:hover{
+  margin-top:-15px;
+
+} */
+/* .welcome_msg{
+  color: rgba(165, 42, 42, 0.962);
+  font-weight: 500;
+  font-size: 20px;
+  font-size: 23px;
+  margin-top: 8px;
+  margin-left: 30px;
+  border: blue solid 2px;
+  text-transform:none;
+} */
 
 /********************** Log in Page ***********************/
 
 /************ Login **************/
 .login_page-container{
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  /* experimento para crear un modal */
+    /* position: fixed;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.228); */
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 .login_container{
   display: flex;
+  background-color: whitesmoke;
   flex-direction: column;
   align-items: center;
-  border: red solid 5px;
+  border:rgba(165, 42, 42, 0.962) solid 5px;
   border-radius: 25px;
-  width: 350px;
+  width: 340px;
   height: 400px;
   margin-top: 50px;
-  
 }
 .login_form{
   /* border: blue solid 3px; */
   display: flex;
   flex-direction: column;
+  margin-top: 15px;
   /* align-items: center; */
 }
 .login_label{
@@ -111,6 +150,186 @@
   width: 90%;
   font-size: 16px;
   margin: 10px auto;
-  
+}
+
+/********************** Profile Page ***********************/
+/* .profile_top{
+  background-color: yellow;
+} */
+.profile_container{
+  background-color: rgba(0, 0, 0, 0.085);
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-content: flex-start;
+  border: blueviolet 2px solid;
+  border-radius: 13px;
+  padding: 16px;
+  margin: 0 10% 0 10%;
+}
+.profile_info_container{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+.profile_info_container hr {
+  border: blueviolet 1px solid;
+}
+.profile_header{
+  display: flex;
+  flex-direction: row;
+  /* border: red 2px solid; */
+  align-items: center;
+}
+.profileimg{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+.avatar_edit_button{
+  background-color:rgba(145, 197, 25, 0.962);
+  display: flex;
+  flex-direction: row;
+  color: white;
+  border: rgba(124, 172, 13, 0.962) 3px solid;
+  border-radius: 12px;
+  width: 200px;
+  height: 40px;
+}
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+.avatar_edit_text{
+  margin: auto;
+  margin-left: 0;
+  font-size: 16px;
+}
+.avatar_container{
+  /* border: brown 3px solid; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.profile_header_text{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-transform: capitalize;
+  font-size: 40px;
+  /* border: #61dafb solid 2px; */
+  margin: 10px;
+}
+.profile_info_text{
+  /* border: green 2px solid; */
+  display: flex;
+  flex-direction: column;
+    flex-wrap: wrap;
+  align-items: flex-start;
+  text-transform: capitalize;
+  width: 400px;
+  padding: 10px;
+}
+.edit_btn_container{
+/* border: brown 3px solid; */
+max-width: 300px;
+}
+.edit_profilebtn{
+  background-color: rgba(145, 197, 25, 0.962);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  color: white;
+  height: 40px;
+  width: 130px;
+  margin-top: 10px;
+  margin-left: 160px;
+  border-radius: 10px;
+  border: rgba(124, 172, 13, 0.962) 3px solid;
+}
+.edit_profilebtn:hover{
+  background-color: rgba(120, 190, 20, 0.962);
+  border: rgba(124, 172, 13, 0.962) 3px solid;
+  cursor: pointer;
+}
+.edit_button_text{
+  margin: auto;
+  font-size: 15px;
+}
+.material-symbols-outlined {
+  margin: auto;
+  font-variation-settings:
+    'FILL' 10,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 30
+}
+
+/* ************* Edit Profile Modal *************  */
+.modal, .edit_profile_modal{
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+.edit_profile_modal{
+  /* display: none; */
+  /* position: fixed;
+  padding-top: 10px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; */
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.edit_profile_modal_container{
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  height: 70%;
+  border: red solid 3px;
+  background-color: white;
+  margin: auto;
+  margin-top: 60px;
+}
+.span_container{
+  align-items: baseline;
+}
+.span_btn_modal{
+margin-right: 0;
+right: 0;
+font-weight: bold;
+color: black;
+}
+.span_btn_modal:hover,
+.span_btn_modal:focus{
+  color: green;
+  cursor: pointer;
+}
+
+
+/* ************* Post *************  */
+
+.post-container{
+  display: block;
+  width: 300px;
+  width: 35%;
+  margin-left: 10%;
+}
+.post-img{
+width: 100%;
+height: 60%;
+}
+.posts-page-container{
+  display: flex;
+  flex-direction: row;
+
 }
 
