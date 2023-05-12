@@ -6,6 +6,7 @@ dotenv.config();
 import userRouter from "./routes/userRoutes.js";
 import petRouter from "./routes/petRoutes.js";
 import cors from "cors";
+import passportConfig from "./config/passport.js";
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -19,6 +20,7 @@ const setMiddlewares = () => {
   );
   app.use(cors());
   cloudinaryConfig();
+  passportConfig();
 };
 
 const connectMongoose = () => {

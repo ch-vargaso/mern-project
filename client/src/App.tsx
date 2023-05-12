@@ -1,27 +1,32 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {Route, Routes} from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import AuthContext, { AuthContextProvider } from './contexts/AuthContext';
+import { AuthContextProvider } from './contexts/AuthContext';
 import NavBar from './components/NavBar';
+import ProfilePosts from './pages/ProfilePosts';
+import Favourites from './pages/Favourites';
 
 function App() {
-  // const { user } = useContext(AuthContext);
   return (
     <div className="App">
       {/* <h1>App funcionando...</h1> */}
       <div>
       </div>
       <AuthContextProvider>
-        {/* <div>{user ? <p>user logged in</p> : <p>user logged out</p> }</div> */}
-        <NavBar/>
+        <NavBar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/profile' element={<Profile />} /> 
-          {/* tiene que cambiar con el id del usuario... :id... */}
+          <Route path='/profile' element={<Profile />} >
+            <Route path='posts' element={<ProfilePosts />} />
+            <Route path='favourites' element={<Favourites />} />
+          </Route>
+          
+
+          {/* tiene que cambiar con el id del usuario... :id... o token??? */}
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
         </Routes>

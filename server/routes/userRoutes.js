@@ -1,6 +1,7 @@
 import express from "express";
-import { testingRoute, getUsers, getUser, createUser, updateUser, login } from "../controllers/userControllers.js";
+import { testingRoute, getUsers, getUser, createUser, updateUser, login, getActiveUser } from "../controllers/userControllers.js";
 import { multerUpload } from "../middlewares/multer.js";
+import jwtAuth from "../middlewares/jwtAuth.js";
 
 // const express = require('express')
 const userRouter = express.Router();
@@ -8,9 +9,11 @@ const userRouter = express.Router();
 userRouter.get("/test", testingRoute);  
 userRouter.get("/all", getUsers);
 userRouter.get("/id/:id", getUser);
+userRouter.get("/active",jwtAuth , getActiveUser);
 
 userRouter.post("/new", multerUpload.single("avatar"), createUser);
-userRouter.post("/update/:id", updateUser);
+userRouter.post("/update", jwtAuth, multerUpload.single("avatar"), updateUser);
+// this is with form data.... postman!!!
 userRouter.post("/login", login);
 
 

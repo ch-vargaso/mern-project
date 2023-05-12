@@ -21,12 +21,11 @@ const getUsers = async (req, res) => {
 const getUser = async (req, res) => {
     const id = req.params.id;
     try {
-        const user = await UserModel.findById(id).populate("pets");
+        const user = await UserModel.findById(id).populate({ path: "pets", select: ["name", "animal"] });
         res.status(200).json(user)
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "algo salió mal..." })
-        
     }
 };
 
@@ -57,15 +56,30 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+    console.log("user", req.user)
+    console.log("user body", req.body)
+
+    const propertiestoUpdate = { ...req.body }
     try {
-        const updateUser = await UserModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (req.file) {
+            const updateAvatar = await imageUpload(req.file, "user_avatars");
+            propertiestoUpdate.avatar = updateAvatar
+        }
+        if (req.body.password) {
+            const encryptedPassword = await encryptPassword(req.body.password);
+            propertiestoUpdate.password = encryptedPassword
+        }
+        console.log(propertiestoUpdate);
+        const updateUser = await UserModel.findByIdAndUpdate(req.user._id, propertiestoUpdate, { new: true });
         // when I update to false, will send me the old version as a response...
         res.status(200).json(updateUser);
+        console.log(updateUser);
     } catch (error) {
         console.log(error);
         res.status(500).send(error.message);
     }
 };
+// make different checks (express validator.. google... ) 
 
 // finBYID... se usa cuando uno tiene algún id??? leer lo de la documentación...
 const login = async (req, res) => {
@@ -101,8 +115,17 @@ const login = async (req, res) => {
     }
 };
 
+const getActiveUser = async (req, res) => {
+    res.status(200).json({
+        _id: req.user._id,
+        email: req.user.email,
+        username: req.user.username,
+        avatar: req.user.avatar,
+        pets: req.user.pets
+    });
+};
 
-export { testingRoute, getUsers, getUser, createUser, updateUser, login }
+export { testingRoute, getUsers, getUser, createUser, updateUser, login, getActiveUser }
 
 //  si uno hace un cosole.log del req, se puede ver todas las propiedades del objeto
 //  con la funcion find. algo, se puede hacer una variedad de cosas con el fin by...

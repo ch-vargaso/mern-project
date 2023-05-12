@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     username: { type: String },
     password: { type: String, required: true },
-    pets: [{ type: mongoose.Schema.Types.ObjectId, ref: "pet" }],
+    pets: [{ type: mongoose.Schema.Types.ObjectId, ref: "pets" }],
     avatar: { type: String, default: "https://res.cloudinary.com/dxyregqsx/image/upload/v1682681502/user_avatars/placeholder_gik52p.png" }
 
   }, { timestamps: true }

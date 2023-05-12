@@ -3,17 +3,16 @@ import React, { useState } from 'react'
 type Props ={}
 // type Avatar = undefined | File 
 
-// interface FormData {
-//     email: String,
-//     username: String,
-//     password: String
-//     avatar: Avatar
-
-// }
+interface FormData {
+    email: string,
+    username: string,
+    password: string,
+    avatar: Avatar
+}
 
 function Register(props: Props) {
     // const [formData, setFormData] = useState({} as FormData); esto con el interface typeScript arriba!
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormData>({
         email: "",
         password: "",
         username: "",
