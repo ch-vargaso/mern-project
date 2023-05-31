@@ -8,7 +8,7 @@ const generateToken = (existingUser) => {
         msg: "funcionando!! creating token..."
     }
     const options = {
-        expiresIn: "7d",
+        expiresIn: "20d",
         // se puede cambiar el tiempo de expiración (ver documentación)
     }
     const token = jwt.sign(payload, process.env.JWT_SECRET, options);

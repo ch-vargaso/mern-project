@@ -1,12 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from 'react'
 
-
-interface User {
-    email?: string, //el singo de pregunta significa que puede ser optional...
-    username: string,
-    avatar: string,
-    pets: string[]
-};
+// tengo que arreglar typeScript!!!!
 interface fetchResult {
     token: string,
     verified: boolean,
@@ -22,7 +16,8 @@ interface AuthContextType {
     // quitar ese loggedUser!!!!! de todo lado!! 
     error: Error | null,
     login(email: string, password: string): void,
-    logout():void
+    logout(): void
+    fetchActiveUser(token: string): void
 }
 
 const initialAuth: AuthContextType = {
@@ -33,13 +28,16 @@ const initialAuth: AuthContextType = {
     },
     logout: () => {
         throw new Error('logout not implemented')
+    },
+    fetchActiveUser:() => {
+            throw new Error('fetch user not implemented')
     }
 };
 
 export const AuthContext = createContext<AuthContextType>(initialAuth);
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<User | null >(null);
     // console.log("user logged in", user)
     const [error, setError] = useState<Error | null>(null);
 
@@ -62,6 +60,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
            
                 if (result.user) {
                     setUser(result.user); 
+                    console.log("user after login", result.user)
                     localStorage.setItem("token", result.token);
                     // localStorage.setItem("my name", "christian");
                 }
@@ -117,7 +116,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     
 
     return (
-      <AuthContext.Provider value={{user, error, login, logout }}>
+      <AuthContext.Provider value={{user, error, login, logout, fetchActiveUser}}>
             {children}
       </AuthContext.Provider>
   )

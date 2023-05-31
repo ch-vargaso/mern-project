@@ -7,6 +7,8 @@ import userRouter from "./routes/userRoutes.js";
 import petRouter from "./routes/petRoutes.js";
 import cors from "cors";
 import passportConfig from "./config/passport.js";
+import postRouter from "./routes/postRoutes.js";
+import commentRouter from "./routes/commetRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -40,9 +42,10 @@ const connectMongoose = () => {
 const connectRoutes = () => {
   app.use('/api/users', userRouter);
   app.use('/api/pets', petRouter);
+  app.use('/api/posts', postRouter);
+  app.use('/api/comments', commentRouter);
   app.use('*', (req, res) => { res.status(500).json({ error: "Endpoint not found" }) });
 };
-
 setMiddlewares();
 connectMongoose();
 connectRoutes();

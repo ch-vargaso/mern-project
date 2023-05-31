@@ -13,7 +13,12 @@ function Login({ }: Props) {
   }
   const handleSubmit = (e: FormEvent <HTMLFormElement>) => {
     e.preventDefault();
-    login(formData.email, formData.password);
+    if (formData.password.length < 5) {
+      alert("password too short")
+    } else {
+      login(formData.email, formData.password);
+    }
+    
   }
 
   return (

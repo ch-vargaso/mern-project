@@ -17,7 +17,40 @@ const passportConfig = () => {
         //     return done(error, false);
         // };
         // esto es en caso de async function, then we have to have async before the function...
-        UserModel.findById(jwt_payload.sub).then((user) => {
+        UserModel.findById(jwt_payload.sub)
+     
+            .populate({
+                path: "posts",
+                populate: [
+                    { path: 'author', select: ['username'] },
+                    {
+                        path: 'comments',
+                        populate: {
+                            path: 'author', select: ['username']
+                        }
+                    }
+                ]
+            })
+            .populate({
+                path: 'pets',
+                populate: {
+                    path: 'owner', select: ['username']
+                }
+            })
+            .populate({
+                path: 'favourites',
+                populate: [
+                { path: 'author', select: ['username'] },
+                    { path: 'comments',
+                        populate: {
+                            path: 'author', select: ['username']
+                        }
+                    }
+                
+                ]
+            })
+
+            .then((user) => {
             return user ? done(null, user) : done(null, false);
         }).catch((error) => {
             return done(error, false);

@@ -9,6 +9,7 @@ const multerUpload = multer({
       cb(new Error("File extension not supported"), false);
       return;
     }
+    // does it accept gif????
     cb(null, true);
   },
 });

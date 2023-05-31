@@ -11,6 +11,7 @@ interface FormData {
 }
 
 function Register(props: Props) {
+    const [displayImage, setDisplayImage] = useState("/images/cat.jpg");
     // const [formData, setFormData] = useState({} as FormData); esto con el interface typeScript arriba!
     const [formData, setFormData] = useState<FormData>({
         email: "",
@@ -26,6 +27,15 @@ function Register(props: Props) {
     const handleFile = (e: any) => {
         // console.log( typeof e.target.files[0])
         setFormData({ ...formData, [e.target.name]: e.target.files[0] })
+        // si quiero esciger varias imagenes tengo que hacer un map???
+        // const localURL = URL.createObjectURL(e.target.files[0]);
+        if(e.target.files[0]){
+        const localURL = URL.createObjectURL(e.target.files[0]);
+        console.log(localURL);
+        setDisplayImage(localURL);
+        } else {
+            setDisplayImage("/images/cat.jpg")
+        }
     };
 
 
@@ -77,8 +87,12 @@ function Register(props: Props) {
                 <input type="text" name="username" placeholder='Username' onChange={handleChange} /><br />
                 <label htmlFor="password"><b>Password</b></label><br />
                 <input type="password" name="password" placeholder='Password' onChange={handleChange} /><br />
+
                 <label htmlFor="file"><b>Select Avatar</b></label><br />
-                <input type="file" name='avatar' accept='image/png, image/jpg, image/jpeg' onChange={handleFile} /><br /><br />
+                <input type="file" name='avatar' accept='image/png, image/jpg, image/jpeg' onChange={handleFile} />
+                <img src={displayImage} alt="uploadimg" />
+                {/* hay que hacer el css de la pagina de registro */}
+                <br /><br />
                 <button type='submit'>Enter the Matrix</button>
             </form>
             <br />

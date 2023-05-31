@@ -5,12 +5,10 @@ function ProfileNavBar() {
     const location = useLocation();
     return (
         <>
-            {/* {location.pathname.includes('profile') ? */}
-                {/* <> */}
-                    <NavLink to={'posts'} className={({ isActive }) => isActive ? 'active_page' : 'nav_link'}>My Posts</NavLink>
-                    <NavLink to={'favourites'} className={({ isActive }) => isActive ? 'active_page' : 'nav_link'}>Favourites</NavLink>
-                {/* </>
-                : null} */}
+            <div className='profile_navbar_container'>
+                    <NavLink to={'/profile'} className={({ isActive }) => isActive ? 'profile_navbar_active_page' : 'profile_navbar_link'}><p>My Posts</p></NavLink>
+                    <NavLink to={'/profile/favourites'} className={({ isActive }) => isActive ? 'profile_navbar_active_page' : 'profile_navbar_link'}><p>Favourites</p></NavLink>
+            </div>
         </>
 
     );

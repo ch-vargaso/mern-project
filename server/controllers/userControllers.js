@@ -10,22 +10,48 @@ const testingRoute = (req, res) => {
 
 const getUsers = async (req, res) => {
     try {
-        const users = await UserModel.find();
+        
+        const users = await UserModel.find().populate({
+            path: 'posts',
+            populate: {
+                path: 'comments',
+                populate: {
+                    path: 'author', select: ['username']
+                }
+            }
+        })
+            .populate({
+                path: 'pets',
+                populate:{path: 'owner', select: ['username']}
+            })
         res.status(200).json(users);
-    } catch (e) {
+    } catch (error) {
         res.status(500).json({error: "something went wrong..."})
-        console.log(e);
+        console.log(error);
     }
 }
 
 const getUser = async (req, res) => {
     const id = req.params.id;
     try {
-        const user = await UserModel.findById(id).populate({ path: "pets", select: ["name", "animal"] });
+        // const user = await UserModel.findById(id).populate({ path: "pets", select: ["name", "animal"] });
+        const user = await UserModel.findById(id).populate({
+            path: 'pets',
+            populate: {
+                path: 'owner', select: ['username']
+            }
+        })
+            .populate({
+                path: 'posts',
+                populate: [
+                    {path: 'author', select: ['username'] },
+                    {path: 'comments'}
+                ]
+            });
         res.status(200).json(user)
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: "algo salió mal..." })
+        res.status(500).json({ error: "algo salió mal con getUser en el controller..." })
     }
 };
 
@@ -43,6 +69,7 @@ const createUser = async (req, res) => {
         avatar: avatar
     });
     try {
+        //1. comprobar que el usuario no esta en la DB ... const exisitingUser =User.Model.find({email: req.body.email})
         const registeredUser = await newUser.save();
         res.status(200).json({
             message: "por fin te registraste!!... desde el server",
@@ -79,12 +106,43 @@ const updateUser = async (req, res) => {
         res.status(500).send(error.message);
     }
 };
+
+const deleteUser = async (req, res) => {
+    console.log
+}
 // make different checks (express validator.. google... ) 
 
 // finBYID... se usa cuando uno tiene algún id??? leer lo de la documentación...
 const login = async (req, res) => {
     try {
-        const existingUser = await UserModel.findOne({ email: req.body.email });
+        const existingUser = await UserModel.findOne({ email: req.body.email })
+              .populate({
+                path: "posts",
+                populate: [
+                    { path: 'author', select: ['username'] },
+                    {
+                        path: 'comments',
+                        populate: {
+                            path: 'author', select: ['username']
+                        }
+                    }
+                ]
+              })
+            .populate({
+                path: "favourites",
+                populate: [
+                    { path: 'author', select: ['username'] },
+                    {
+                        path: 'comments',
+                        populate: {
+                            path: 'author', select: ['username']
+                        }
+                    }
+            
+                ]
+            
+        })
+        
         // verifyPassword(req.body.password, existingUser.password);
         if (!existingUser) {
             res.status(404).json({ error: "no se encontró ningún usuario..." })
@@ -102,9 +160,13 @@ const login = async (req, res) => {
                     token: token,
                     user: {
                         _id: existingUser._id,
+                        name: existingUser.name,
                         username: existingUser.username,
                         pets: existingUser.pets,
-                        avatar: existingUser.avatar
+                        avatar: existingUser.avatar,
+                        about: existingUser.about,
+                        posts: existingUser.posts,
+                        favourites:existingUser.favourites
                     }
                 })
             }
@@ -119,11 +181,16 @@ const getActiveUser = async (req, res) => {
     res.status(200).json({
         _id: req.user._id,
         email: req.user.email,
+        name: req.user.name,
         username: req.user.username,
         avatar: req.user.avatar,
-        pets: req.user.pets
+        pets: req.user.pets,
+        about: req.user.about,
+        posts: req.user.posts,
+        favourites: req.user.favourites
     });
 };
+
 
 export { testingRoute, getUsers, getUser, createUser, updateUser, login, getActiveUser }
 
