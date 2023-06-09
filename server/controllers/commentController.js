@@ -52,7 +52,7 @@ const createComment = async (req, res) => {
 const deleteComment = async (req, res) => {
     try {
         const commentToDelete = await commentModel.findByIdAndDelete(req.body._id)
-        console.log("comment deleted...", req.body._id)
+        // console.log("comment deleted...", req.body._id)
         res.status(200).json(commentToDelete);
         console.log(commentToDelete)
     } catch (error) {

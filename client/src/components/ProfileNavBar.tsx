@@ -6,7 +6,7 @@ function ProfileNavBar() {
     return (
         <>
             <div className='profile_navbar_container'>
-                    <NavLink to={'/profile'} className={({ isActive }) => isActive ? 'profile_navbar_active_page' : 'profile_navbar_link'}><p>My Posts</p></NavLink>
+                    <NavLink end to={'/profile'} className={({ isActive }) => isActive ? 'profile_navbar_active_page' : 'profile_navbar_link'}><p>My Posts</p></NavLink>
                     <NavLink to={'/profile/favourites'} className={({ isActive }) => isActive ? 'profile_navbar_active_page' : 'profile_navbar_link'}><p>Favourites</p></NavLink>
             </div>
         </>

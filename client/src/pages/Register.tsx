@@ -11,7 +11,7 @@ interface FormData {
 }
 
 function Register(props: Props) {
-    const [displayImage, setDisplayImage] = useState("/images/cat.jpg");
+    const [displayImage, setDisplayImage] = useState("");
     // const [formData, setFormData] = useState({} as FormData); esto con el interface typeScript arriba!
     const [formData, setFormData] = useState<FormData>({
         email: "",
@@ -34,7 +34,9 @@ function Register(props: Props) {
         console.log(localURL);
         setDisplayImage(localURL);
         } else {
-            setDisplayImage("/images/cat.jpg")
+            // setDisplayImage("/images/cat.jpg")
+            setDisplayImage(" ")
+
         }
     };
 
@@ -59,44 +61,39 @@ function Register(props: Props) {
             const response = await fetch(`${process.env.REACT_APP_BASE_URL}users/new`, requestOptions);
             const result = await response.json();
             console.log(result);
-            alert("por fin!!! a la casa, well done!!!");
-
+            alert("successfully registred");
+            
         } catch (error) {
             console.log(error);
             alert("Something went wrong - OMG! check console");
         }
     };
 
-    const onClickHandler = () => {
-        console.log("prueba...",`${process.env.REACT_APP_BASE_URL}`);
-    }
-  
-    // alternative HandleSubmit
-    // const handleSubmit = (e: { preventDefault: () => void }) => {
-    //     e.preventDefault();
-    //     console.log(formData);
-    // };
-
     return (
         <div>
-            <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email"><b>E-Mail Address</b></label><br/>
-                <input type="email" name="email" placeholder='Email' onChange={handleChange} /><br />
-                <label htmlFor="username"><b>Username</b></label><br />
-                <input type="text" name="username" placeholder='Username' onChange={handleChange} /><br />
-                <label htmlFor="password"><b>Password</b></label><br />
-                <input type="password" name="password" placeholder='Password' onChange={handleChange} /><br />
+            <div className='register_form_container' >
+                <h2>Create an Account</h2>
+                <form onSubmit={handleSubmit} className='register_form'>
+                    <label htmlFor="email"><b>E-Mail Address</b></label>
+                    <input type="email" name="email" placeholder='Email' onChange={handleChange} />
+                    <label htmlFor="username"><b>Username</b></label>
+                    <input type="text" name="username" placeholder='Username' onChange={handleChange} />
+                    <label htmlFor="password"><b>Password</b></label>
+                    <input type="password" name="password" placeholder='Password' onChange={handleChange} />
 
-                <label htmlFor="file"><b>Select Avatar</b></label><br />
-                <input type="file" name='avatar' accept='image/png, image/jpg, image/jpeg' onChange={handleFile} />
-                <img src={displayImage} alt="uploadimg" />
-                {/* hay que hacer el css de la pagina de registro */}
-                <br /><br />
-                <button type='submit'>Enter the Matrix</button>
-            </form>
-            <br />
-                <button onClick={onClickHandler}>prueba para .env </button>
+                    <label htmlFor="file"><b>Select Avatar</b></label>
+                    <div className='register_select_avatar_btn'>
+                        <span className="material-symbols-outlined">photo_library</span>                        
+                        <p>Choose Image</p>
+                        <input type="file" name='avatar' accept='image/png, image/jpg, image/jpeg' onChange={handleFile}/>                        
+                    </div>
+                    {/* <input type="file" name='avatar' accept='image/png, image/jpg, image/jpeg' onChange={handleFile} /> */}
+                   {displayImage && <img src={displayImage} alt="uploadimg" /> } 
+                    {/* hay que hacer el css de la pagina de registro */}
+                    <button type='submit'>Enter the Matrix</button>
+                </form>
+            </div>
+            
         </div>
   )
 }

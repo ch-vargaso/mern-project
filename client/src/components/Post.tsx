@@ -14,6 +14,7 @@ const Post = (props: Props) => {
     const { user, fetchActiveUser } = useContext(AuthContext)
     const [isfavourite, setIsFavourite] = useState(false);
     const [likes, setLikes] = useState([])
+    //  likes length + 1 or -1 ...
 
         
     // console.log("favoritos!!!", FavouritesArray);
@@ -234,7 +235,7 @@ const Post = (props: Props) => {
 
     window.onclick = () => {
         setOptionsModal(false)
-        console.log("testing")
+        // console.log("testing")
     }
 
     const handleDeleteCommentSubmit = async (e: { preventDefault: () => void; }, id: string) => {
@@ -262,7 +263,7 @@ const Post = (props: Props) => {
                 fetchActiveUser(token)
             }
             console.log(result)
-            alert("comment deleted")
+            // alert("comment deleted")
         } catch (error) {
             console.log('error :>> ', error);
             alert("error deleting the comment...")
@@ -325,8 +326,8 @@ const Post = (props: Props) => {
                 <div className='post_text_container' >
                     <div className='author'>
                         <h4>Posted by:</h4>
-                        <Link to={''}> {props.user_post.author.username}</Link>
-                    </div>
+                        <Link to={`/id/${props.user_post.author._id}`}> {props.user_post.author.username}</Link>
+                    </div> 
                     <div className='sector'>
                         <h4>Sector:</h4>
                         <p>{props.user_post.sector}</p>
@@ -387,6 +388,7 @@ const Post = (props: Props) => {
                                     <span className="material-symbols-outlined" onClick={toogleModal}>close</span>
                                 </button>
                             </div>
+
                             <form className='new_post_form' onSubmit={handleEditPostSubmit}>
                                 <label htmlFor="new_post_title" >Title</label>
                                 <input type="text" id="new_post_title" name="title" placeholder='title' onChange={handleChange} />

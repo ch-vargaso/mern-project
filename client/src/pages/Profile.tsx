@@ -90,6 +90,8 @@ function Profile() {
     }
   };
 
+  const posts = user?.posts
+
   return (
     <div>
       <div>
@@ -107,8 +109,7 @@ function Profile() {
                     </div>
                   </form>
                   
-                  {/* onChange={handleFile} */}
-                   
+            
                 </div>
                 {user && <h2 className='profile_header_text' >{user.username}</h2>}
               </div>
@@ -130,7 +131,7 @@ function Profile() {
           </div>
                 <div>
         {location.pathname.includes('favourites') || location.pathname.includes('posts') || location.pathname.includes('profile') ?
-          <Outlet /> :
+              <Outlet context={{posts}} /> :
           <>
             <ProfileNavBar />
           </>
@@ -153,20 +154,20 @@ function Profile() {
                 </div>
 
                 <form className='edit_profile_form' onSubmit={handleSubmit} >
-                  <label htmlFor="name"><b>Name</b></label><br/>
-                  <input type="text" name="name" placeholder='Name' onChange={handleChange} /><br />
+                  <label htmlFor="name"><b>Name</b></label>
+                  <input type="text" name="name" placeholder='Name' onChange={handleChange} />
                   
-                  <label htmlFor="username"><b>Username</b></label><br />
-                  <input type="text" name="username" placeholder='Username' onChange={handleChange} /><br />
+                  <label htmlFor="username"><b>Username</b></label>
+                  <input type="text" name="username" placeholder='Username' onChange={handleChange} />
 
-                  <label htmlFor="email"><b>E-Mail Address</b></label><br />
-                  <input type="email" name="email" placeholder='Email' onChange={handleChange} /><br />
+                  <label htmlFor="email"><b>E-Mail Address</b></label>
+                  <input type="email" name="email" placeholder='Email' onChange={handleChange} />
 
-                  <label htmlFor="about"><b>About</b></label><br />
-                  <textarea name='about' placeholder='write something...' onChange={handleChange} /><br />
+                  <label htmlFor="about"><b>About</b></label>
+                  <textarea name='about' placeholder='write something...' onChange={handleChange} />
 
-                  <label htmlFor="file">Change Avatar</label><br />
-                  <input type="file" name='avatar' accept='image/png, image/jpg, image/jpeg' onChange={handleFile}/><br />
+                  <label htmlFor="file">Change Avatar</label>
+                  <input type="file" name='avatar' accept='image/png, image/jpg, image/jpeg' onChange={handleFile}/>
 
                   <button type='submit'>Update User</button>
                 </form>

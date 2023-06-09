@@ -5,6 +5,7 @@ import { type } from 'os';
 import Comment from '../components/Comment';
 import Post from '../components/Post';
 import getToken from '../utils/getToken';
+import { useOutletContext } from 'react-router-dom';
 
 type Postimg = string | File
 // type Tag = string[]
@@ -81,6 +82,9 @@ function ProfilePosts(props: Props) {
     
     const postArray = (user?.posts)
 
+    const {posts}: any = useOutletContext();
+    
+    console.log('posts :>> ', posts);
 
     // ++++++++++++++++ FUNCTIONS FOR THE CHAT  ++++++++++++++++++++
 

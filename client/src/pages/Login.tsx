@@ -23,14 +23,14 @@ function Login({ }: Props) {
 
   return (
     <div className='login_page-container'>
-      <div className='login_container'>
-        <h1>Welcome to Graffitis</h1>
+      <div className='login_form_container'>
+        <h2>Welcome to Graffitis</h2>
         <form onSubmit={handleSubmit} className='login_form'>
-          <label htmlFor="email" className='login_label' ><b>E-Mail Address</b></label>
-          <input type="email" name="email" placeholder='Email' onChange={handleChange} className='login_input' /><br />
-          <label htmlFor="password" className='login_label'><b>Password</b></label>
-          <input type="password" name="password" placeholder='Password' onChange={handleChange} className='login_input' /><br />
-          <button type='submit' className='login_button' >Login</button>
+          <label htmlFor="email"><b>E-Mail Address</b></label>
+          <input type="email" name="email" placeholder='Email' onChange={handleChange}/>
+          <label htmlFor="password"><b>Password</b></label>
+          <input type="password" name="password" placeholder='Password' onChange={handleChange}/>
+          <button type='submit'>Login</button>
         </form>
       </div>
     </div>

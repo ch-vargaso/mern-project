@@ -131,6 +131,7 @@
   text-decoration: none;
   width: 50%;
     color: #f1f1f1;
+    
     font-weight: 500;
     margin: 0px;
     /* border: #1a71a9 3px solid;
@@ -139,6 +140,7 @@
 .profile_navbar_link p{
   color: #f1f1f1;
   margin-top: 10px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .profile_navbar_link:hover{
   background-color: rgba(49, 194, 223, 0.811) ;
@@ -157,11 +159,113 @@
 }
 .profile_navbar_active_page p{
   color: #f1f1f1;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   margin: 8px 0px;
 }
 
+/********************** Register ***********************/
 
+.register_form_container{
+    display: flex;
+      flex-direction: column;
+      max-width: 450px;
+      max-height: 750px;
+      border: rgba(145, 197, 25, 0.962) solid 4px;
+      border-radius: 20px;
+      background-color: white;
+      margin: auto;
+      margin-top: 80px;
+}
+.register_form_container h2{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 60px ;
+  }
+.register_form{
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+    width: 75%;
+    margin: 0px auto;
+}
+.register_form label{
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: left;
+    margin-bottom: 4px;
+}
+.register_form input{
+  height: 30px;
+  border-radius: 10px;
+  border: #289cc0 2px solid;
+  outline: none;
+}
+.register_form input:focus-visible{
+  border: #289dc0c1 2px solid;
+}
+.register_form input::placeholder{
+  font-size: 15px;
+  text-transform: capitalize;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.register_select_avatar_btn{
+  position: relative;
+  height: 30px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  color:#289cc0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border: #289cc0 2px solid;
+  border-radius: 12px;
+}
+.register_select_avatar_btn span{
+  font-size: 21px;
+  margin-left: 15px;
+}
+.register_select_avatar_btn:hover{
+    /* background-color: rgba(120, 190, 20, 0.962); */
+    border: #289dc0c1 2px solid;
+    color: #289dc0c1;
+    cursor: pointer;
+}
+.register_select_avatar_btn p{
+  margin: auto;
+  margin-left: -50px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.register_select_avatar_btn input{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
 
+.register_form img{
+  width: 100%;
+  margin: auto;
+  max-height: 230px;
+}
+.register_form button {
+  margin: 19px auto;
+  width: 80%;
+  height: 30px;
+  background-color: rgba(145, 197, 25, 0.962);
+  border: rgba(124, 172, 13, 0.962) 3px solid;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold
+}
+.register_form button:hover{
+  cursor: pointer;
+  background-color: rgba(145, 197, 25, 0.832);
+}
 
 
 
@@ -183,49 +287,69 @@
     top: 0;
     bottom: 0;
 }
-.login_container{
-  display: flex;
-  background-color: whitesmoke;
-  flex-direction: column;
-  align-items: center;
-  border:rgba(165, 42, 42, 0.962) solid 5px;
-  border-radius: 25px;
-  width: 340px;
-  height: 400px;
-  margin-top: 50px;
+
+.login_form_container{
+    display: flex;
+      flex-direction: column;
+      width: 400px;
+      height:350px;
+      border: rgba(145, 197, 25, 0.962) solid 4px;
+      border-radius: 20px;
+      background-color: white;
+      margin: auto;
+      margin-top: 80px;
+}
+.login_form_container h2{
+  margin-top: 40px ;
 }
 .login_form{
-  /* border: blue solid 3px; */
-  display: flex;
-  flex-direction: column;
-  margin-top: 15px;
-  /* align-items: center; */
+    display: flex;
+      gap: 6px;
+      flex-direction: column;
+      width: 70%;
+      margin: 0px auto;
 }
-.login_label{
-  font-size: 18px;
+.login_form label{
+  font-weight: bold;
+  font-size: 15px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   text-align: left;
-  margin-bottom: 5px;
-
+  margin-bottom: 4px;
 }
-
-.login_input{
-  border-radius: 10px;
+.login_form input{
   height: 30px;
-  width: 260px;
-}
-.login_button{
   border-radius: 10px;
-  height: 30px;
-  width: 90%;
-  font-size: 16px;
-  margin: 10px auto;
+  border: #289cc0 2px solid;
+  outline: none;
 }
+.login_form input:focus-visible{
+  border: #289dc0c1 2px solid;
+}
+.login_form input::placeholder{
+  font-size: 15px;
+  text-transform: capitalize;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.login_form button{
+  margin: 29px auto;
+  width: 80%;
+  height: 30px;
+  background-color: rgba(145, 197, 25, 0.962);
+  border: rgba(124, 172, 13, 0.962) 3px solid;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold
+}
+
+
 /* +++++++++++++++++++++++++++++++++++++++  Home +++++++++++++++++++++++++++++++++++++++ */
 .home_title{
   position: relative;
   top: 40px;
   margin-bottom: 20px;
 }
+
 
 /********************** Profile Page ***********************/
 
@@ -381,8 +505,9 @@ padding: 10px;
   flex-direction: column;
   width: 35%;
   height: 70%;
-  border: red solid 3px;
-  background-color: rgb(169, 52, 52);
+  border: rgba(145, 197, 25, 0.962) solid 4px;
+  border-radius: 20px;
+  background-color: white;
   margin: auto;
   margin-top: 80px;
 }
@@ -392,19 +517,14 @@ padding: 10px;
   justify-content: flex-end;
   font-size: 4px;
 }
-/* .span_container, .material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 30,
-    'wght' 800,
-    'GRAD' 0,
-    'opsz' 48
-} */
 
 .span_btn_modal{
 margin-right: 0;
 right: 0;
 font-weight: bold;
 color: black;
+background-color: white;
+border: none;
 }
 .span_btn_modal,
 .material-symbols-outlined {
@@ -420,6 +540,70 @@ color: black;
   color: green;
   cursor: pointer;
 }
+
+
+.edit_profile_form{
+  display: flex;
+  gap: 6px;
+  flex-direction: column;
+  width: 70%;
+  margin: 0px auto;
+}
+.edit_profile_form label {
+    font-weight: bold;
+      font-size: 15px;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      text-align: left;
+      margin-bottom: 4px;
+}
+.edit_profile_form input{
+    height: 30px;
+    border-radius: 10px;
+    border: #289cc0 2px solid;
+    outline: none;
+}
+.edit_profile_form input:focus-visible{
+  border: #289dc0c1 2px solid;
+}
+.edit_profile_form input::placeholder{
+  font-size: 15px;
+  text-transform: capitalize;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.edit_profile_form textarea{
+    height: 80px;
+    border: #289cc0 2px solid;
+    border-radius: 10px;
+    outline: none;
+    resize: none;
+}
+.edit_profile_form textarea:focus-visible{
+  border: #289dc0c1 2px solid;
+}
+.edit_profile_form textarea::placeholder{
+  font-size: 15px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.edit_profile_form button{
+  margin: 7px auto;
+  width: 80%;
+  height: 30px;
+  background-color: rgba(145, 197, 25, 0.962);
+  border: rgba(124, 172, 13, 0.962) 3px solid;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold
+}
+.edit_profile_form button:hover{
+  background-color: rgba(120, 190, 20, 0.962);
+  border: rgba(124, 172, 13, 0.962) 3px solid;
+  cursor: pointer;
+}
+
+
+
+
 
 
 /* ************************** Post ***************************  */
@@ -514,8 +698,8 @@ color: black;
   gap: 6px;
   width: 70%;
   margin: 0px auto;
-
 }
+
 .new_post_form label{
   font-weight: bold;
   font-size: 15px;
@@ -551,9 +735,9 @@ color: black;
   font-size: 15px;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.new_post_form p{
+/* .new_post_form p{
   margin: 6px;
-}
+} */
 .new_post_form button{
   margin:  20px auto;
   width: 80%;

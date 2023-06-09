@@ -9,6 +9,7 @@ import { AuthContextProvider } from './contexts/AuthContext';
 import NavBar from './components/NavBar';
 import ProfilePosts from './pages/ProfilePosts';
 import Favourites from './pages/Favourites';
+import UserProfile from './pages/UserProfile';
 
 function App() {
   return (
@@ -20,12 +21,16 @@ function App() {
         <NavBar />
         <Routes>
           <Route path='/' element={<Home />} />
+          
+          <Route path='id/:id' element={<UserProfile />} >
+            {/* <Route index element={} />     */}
+          </Route>
+
           <Route path='/profile' element={<Profile />} >
             <Route index element={<ProfilePosts />} />
             <Route path='favourites' element={<Favourites />} />
           </Route>
           
-
           {/* tiene que cambiar con el id del usuario... :id... o token??? */}
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />

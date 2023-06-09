@@ -33,7 +33,7 @@ function Home( props: Props) {
       setPosts(result)
       console.log("todos los posts", result)
     } catch (error) {
-      
+      console.log('error :>> ', error);
     }
   }
 
@@ -50,10 +50,9 @@ function Home( props: Props) {
   return (
     <div>
       <div>
-        <h1 className='home_title' >Last Posts</h1>
+        <h2 className='home_title' >Last Posts</h2>
       </div>
            
-
       <div className='posts-page-container' >
         {posts && posts.map((post: Post) => {
           return(
@@ -62,21 +61,6 @@ function Home( props: Props) {
             </>
           )
         })}
-        {/* {users && users.map((user, i) => {
-          
-          return (
-            <>
-            <p key={i}> {user.username}</p>
-              <p>{user.email}</p>
-              <div className='posts-page-container' key={user.posts._id}>
-                < Post key={user.posts._id} user_post={user.posts} /> 
-              </div>
-            </>
-          )
-          
-          
-
-        })} */}
       </div>
     </div>
   )
