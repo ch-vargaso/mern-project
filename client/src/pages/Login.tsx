@@ -18,7 +18,6 @@ function Login({ }: Props) {
     } else {
       login(formData.email, formData.password);
     }
-    
   }
 
   return (

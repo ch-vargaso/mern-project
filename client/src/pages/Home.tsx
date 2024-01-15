@@ -22,7 +22,6 @@ function Home( props: Props) {
   //   }
   // };
 
-
   const getAllPosts = async () => {
     const requestOptions = {
       method: 'GET',
@@ -41,11 +40,6 @@ function Home( props: Props) {
       // getUsers();  
       getAllPosts();
   }, []);
-
-
-
-
-
 
   return (
     <div>

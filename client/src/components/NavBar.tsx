@@ -64,6 +64,7 @@ export default NavBar
 
 
             {/* Esto tengo que corregirlo!!!!! */}
+            
             {/* <div>{user ? <p>user logged in</p> : <p>user logged out</p>}</div>
             <div>{user ? <button onClick={logout}>Log out</button> : <Link to='/login'>Login</Link>}</div> */}
             {/* Tengo que borrar después el link de react - dom de impoort cuando lo corriga... */}

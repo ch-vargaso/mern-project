@@ -28,7 +28,8 @@ const Post = (props: Props) => {
                 )
             });
             setIsFavourite(check);
-            console.log("favourite check", check)
+            // console.log("favourite check", check)
+            // este es el check para comprobar si hay o no un favorito
         }
     
     }, [user]);

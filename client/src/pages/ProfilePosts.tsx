@@ -112,7 +112,7 @@ function ProfilePosts(props: Props) {
                                 <label htmlFor="new_post_title" >Title</label>
                                 <input type="text" id="new_post_title" name="title" placeholder='title'onChange={handleChange} />
 
-                                <label htmlFor="new_post_img"  >Image</label>
+                                <label htmlFor="new_post_img" >Image</label>
                                 <input type="file" id="new_post_img"name='image' accept='image/png, image/jpg, image/jpeg' onChange={handleFile}/>
 
                                 <label htmlFor="new_post_sector"  >Sector</label>
