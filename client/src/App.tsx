@@ -21,11 +21,9 @@ function App() {
         <NavBar />
         <Routes>
           <Route path='/' element={<Home />} />
-          
           <Route path='id/:id' element={<UserProfile />} >
             {/* <Route index element={} />     */}
           </Route>
-
           <Route path='/profile' element={<Profile />} >
             <Route index element={<ProfilePosts />} />
             <Route path='favourites' element={<Favourites />} />

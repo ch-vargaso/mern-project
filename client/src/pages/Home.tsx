@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Post from '../components/Post';
+import { Link } from 'react-router-dom';
+import CustomButton from '../components/CustomButton';
 
 
 
@@ -8,19 +10,9 @@ type Posts = Post[]
 type Props = {}
 
 
-function Home( props: Props) {
+function Home(props: Props) {
   // const [users, setUsers] = useState<null | Users>([]);
-  const [posts, setPosts] = useState< Posts>([])
-  // const getUsers = async () => {
-  //   try {
-  //     const response = await fetch(`${process.env.REACT_APP_BASE_URL}users/all`);
-  //     const result = await response.json();
-  //     setUsers(result)
-  //     console.log("todos los usuarios: ", result)
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const [posts, setPosts] = useState<Posts>([])
 
   const getAllPosts = async () => {
     const requestOptions = {
@@ -36,26 +28,24 @@ function Home( props: Props) {
     }
   }
 
-    useEffect(() => {
-      // getUsers();  
-      getAllPosts();
+  useEffect(() => {
+    // getUsers();  
+    getAllPosts();
   }, []);
 
   return (
-    <div>
-      <div>
-        <h2 className='home_title' >Last Posts</h2>
+    <div className='page_container'>
+      <div className='content_container' >
+        <div className='home_title'>
+          <h1 >Welcome to Graffitis</h1>
+        </div>
+        <div className='home_buttons' >
+            <CustomButton link='' text='login as guest'/>
+            <CustomButton link='/login' text='login'/>
+            <CustomButton link='/register' text='register'/>
+        </div>
       </div>
-           
-      <div className='posts-page-container' >
-        {posts && posts.map((post: Post) => {
-          return(
-            <>
-              < Post key={post._id} user_post={post} /> 
-            </>
-          )
-        })}
-      </div>
+
     </div>
   )
 };
